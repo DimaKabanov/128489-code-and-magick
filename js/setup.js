@@ -1,11 +1,16 @@
 'use strict';
 
 var openSetup = document.querySelector('.setup-open');
-var closeSetup = document.querySelector('.setup-close');
 var windowSetup = document.querySelector('.setup');
-var coat = document.getElementById('wizard-coat');
-var eyes = document.getElementById('wizard-eyes');
-var fireball = document.querySelector('.setup-fireball-wrap');
+var setupWizardForm = document.querySelector('.setup-wizard-form');
+var closeSetup = setupWizardForm.querySelector('.setup-close');
+var coat = setupWizardForm.querySelector('#wizard-coat');
+var eyes = setupWizardForm.querySelector('#wizard-eyes');
+var fireball = setupWizardForm.querySelector('.setup-fireball-wrap');
+var UserNameField = setupWizardForm.querySelector('.setup-user-name');
+
+UserNameField.required = true;
+UserNameField.maxLength = 50;
 
 var randomColor = function () {
   var num = [];
