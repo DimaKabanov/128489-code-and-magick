@@ -1,5 +1,8 @@
 'use strict';
 
+var KEY_CODE_ENTER = 13;
+var KEY_CODE_ESCAPE = 27;
+
 var openSetup = document.querySelector('.setup-open');
 var windowSetup = document.querySelector('.setup');
 var setupWizardForm = document.querySelector('.setup-wizard-form');
@@ -8,6 +11,7 @@ var coat = setupWizardForm.querySelector('#wizard-coat');
 var eyes = setupWizardForm.querySelector('#wizard-eyes');
 var fireball = setupWizardForm.querySelector('.setup-fireball-wrap');
 var UserNameField = setupWizardForm.querySelector('.setup-user-name');
+var setupSubmit = setupWizardForm.querySelector('.setup-submit');
 
 UserNameField.required = true;
 UserNameField.maxLength = 50;
@@ -22,12 +26,65 @@ var randomColor = function () {
   return 'rgb' + '(' + num[0] + ',' + num[1] + ',' + num[2] + ')';
 };
 
-openSetup.addEventListener('click', function () {
+var isActiveEvent = function (e) {
+  return e.keyCode && e.keyCode === KEY_CODE_ENTER;
+};
+
+var handlerKeydownEvent = function (e) {
+  if (e.keyCode === KEY_CODE_ESCAPE) {
+    closeSetupWizardForm()
+  }
+};
+
+var closeFormButton = function (e) {
+  e.preventDefault();
+
+  if (isActiveEvent(e)) {
+    closeSetupWizardForm();
+  }
+};
+
+var openSetupWizardForm = function () {
   windowSetup.classList.remove('invisible');
+  openSetup.firstElementChild.setAttribute('aria-pressed', 'true');
+  windowSetup.setAttribute('aria-hidden', 'false');
+
+  document.addEventListener('keydown', handlerKeydownEvent);
+  setupSubmit.addEventListener('keydown', closeFormButton);
+};
+
+var closeSetupWizardForm = function () {
+  windowSetup.classList.add('invisible');
+  openSetup.firstElementChild.setAttribute('aria-pressed', 'false');
+  windowSetup.setAttribute('aria-hidden', 'true');
+
+  document.removeEventListener('keydown', handlerKeydownEvent);
+  setupSubmit.removeEventListener('keydown', closeFormButton);
+};
+
+openSetup.addEventListener('click', function () {
+  openSetupWizardForm();
 });
 
 closeSetup.addEventListener('click', function () {
-  windowSetup.classList.add('invisible');
+  closeSetupWizardForm();
+});
+
+setupSubmit.addEventListener('click', function (e) {
+  e.preventDefault();
+  closeSetupWizardForm();
+});
+
+openSetup.addEventListener('keydown', function (e) {
+  if (isActiveEvent(e)) {
+    openSetupWizardForm();
+  }
+});
+
+closeSetup.addEventListener('keydown', function (e) {
+  if (isActiveEvent(e)) {
+    closeSetupWizardForm();
+  }
 });
 
 coat.addEventListener('click', function () {
