@@ -12,19 +12,32 @@ var eyes = setupWizardForm.querySelector('#wizard-eyes');
 var fireball = setupWizardForm.querySelector('.setup-fireball-wrap');
 var UserNameField = setupWizardForm.querySelector('.setup-user-name');
 var setupSubmit = setupWizardForm.querySelector('.setup-submit');
+var colorsForCoat = [
+  '#a63333',
+  '#2d6dcc',
+  '#2dcc57',
+  '#ccbf2d',
+  '#121010'
+];
+
+var colorsForEyes = [
+  '#9c0ee8',
+  '#353fb0',
+  '#2dcc57',
+  '#39664d',
+  '#22403c'
+];
+
+var colorsForFireball = [
+  '#e88eb5',
+  '#2d6dcc',
+  '#449152',
+  '#916f19',
+  '#2d3b2f'
+];
 
 UserNameField.required = true;
 UserNameField.maxLength = 50;
-
-var randomColor = function () {
-  var num = [];
-
-  for (var i = 0; i !== 3; i++) {
-    num[i] = Math.floor(Math.random() * 256);
-  }
-
-  return 'rgb' + '(' + num[0] + ',' + num[1] + ',' + num[2] + ')';
-};
 
 var isActiveEvent = function (e) {
   return e.keyCode && e.keyCode === KEY_CODE_ENTER;
@@ -32,7 +45,7 @@ var isActiveEvent = function (e) {
 
 var handlerKeydownEvent = function (e) {
   if (e.keyCode === KEY_CODE_ESCAPE) {
-    closeSetupWizardForm()
+    closeSetupWizardForm();
   }
 };
 
@@ -51,6 +64,14 @@ var openSetupWizardForm = function () {
 
   document.addEventListener('keydown', handlerKeydownEvent);
   setupSubmit.addEventListener('keydown', closeFormButton);
+
+  window.colorizeElement(coat, colorsForCoat, 'fill', 'click');
+  window.colorizeElement(eyes, colorsForEyes, 'fill', 'click');
+  window.colorizeElement(fireball, colorsForFireball, 'background', 'click');
+
+  window.colorizeElement(coat, colorsForCoat, 'fill', 'keydown');
+  window.colorizeElement(eyes, colorsForEyes, 'fill', 'keydown');
+  window.colorizeElement(fireball, colorsForFireball, 'background', 'keydown');
 };
 
 var closeSetupWizardForm = function () {
@@ -85,16 +106,4 @@ closeSetup.addEventListener('keydown', function (e) {
   if (isActiveEvent(e)) {
     closeSetupWizardForm();
   }
-});
-
-coat.addEventListener('click', function () {
-  coat.style.fill = randomColor();
-});
-
-eyes.addEventListener('click', function () {
-  eyes.style.fill = randomColor();
-});
-
-fireball.addEventListener('click', function () {
-  fireball.style.background = randomColor();
 });
