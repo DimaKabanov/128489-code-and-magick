@@ -5,7 +5,7 @@ window.colorizeElement = function (element, colors, property, eventType) {
 
   element.addEventListener(eventType, function (e) {
 
-    if (e.type === 'click' || window.isActiveEvent(e)) {
+    if (e.type === 'click' || window.utils.isActiveEvent(e)) {
       var newColor = null;
       while (!newColor || newColor === currentColor) {
         newColor = window.utils.getRandomElementExcept(colors, currentColor);

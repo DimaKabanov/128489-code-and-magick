@@ -11,5 +11,8 @@ window.utils = {
       randomElement = this.getRandomElement(array);
     }
     return randomElement;
+  },
+  isActiveEvent: function (e) {
+    return e.keyCode && e.keyCode === KEY_CODE_ENTER;
   }
 };

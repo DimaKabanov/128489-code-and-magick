@@ -39,10 +39,6 @@ var colorsForFireball = [
 UserNameField.required = true;
 UserNameField.maxLength = 50;
 
-var isActiveEvent = function (e) {
-  return e.keyCode && e.keyCode === KEY_CODE_ENTER;
-};
-
 var handlerKeydownEvent = function (e) {
   if (e.keyCode === KEY_CODE_ESCAPE) {
     closeSetupWizardForm();
@@ -52,7 +48,7 @@ var handlerKeydownEvent = function (e) {
 var closeFormButton = function (e) {
   e.preventDefault();
 
-  if (isActiveEvent(e)) {
+  if (window.utils.isActiveEvent(e)) {
     closeSetupWizardForm();
   }
 };
@@ -97,13 +93,13 @@ setupSubmit.addEventListener('click', function (e) {
 });
 
 openSetup.addEventListener('keydown', function (e) {
-  if (isActiveEvent(e)) {
+  if (window.utils.isActiveEvent(e)) {
     openSetupWizardForm();
   }
 });
 
 closeSetup.addEventListener('keydown', function (e) {
-  if (isActiveEvent(e)) {
+  if (window.utils.isActiveEvent(e)) {
     closeSetupWizardForm();
   }
 });
