@@ -1,15 +1,18 @@
 'use strict';
 
-window.colorizeElement = function (element, colors, property, event) {
-  var carrentColor = colors[0];
+window.colorizeElement = function (element, colors, property, eventType) {
+  var currentColor = colors[0];
 
-  element.addEventListener(event, function () {
-    var newColor = null;
-    while (!newColor || newColor === carrentColor) {
-      newColor = window.utils.getRandomElementExcept(colors, carrentColor);
+  element.addEventListener(eventType, function (e) {
+
+    if (e.type === 'click' || window.isActiveEvent(e)) {
+      var newColor = null;
+      while (!newColor || newColor === currentColor) {
+        newColor = window.utils.getRandomElementExcept(colors, currentColor);
+      }
+      currentColor = newColor;
+      element.style[property] = currentColor;
     }
 
-    carrentColor = newColor;
-    element.style[property] = carrentColor;
   });
 };
