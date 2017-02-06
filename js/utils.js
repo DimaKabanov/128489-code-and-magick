@@ -1,6 +1,7 @@
 'use strict';
 
 window.utils = {
+  KEY_CODE_ENTER: 13,
   getRandomElement: function (array) {
     var randomIndex = Math.floor(Math.random() * array.length);
     return array[randomIndex];
@@ -13,6 +14,6 @@ window.utils = {
     return randomElement;
   },
   isActiveEvent: function (e) {
-    return e.keyCode && e.keyCode === KEY_CODE_ENTER;
+    return e.keyCode && e.keyCode === this.KEY_CODE_ENTER;
   }
 };

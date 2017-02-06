@@ -1,6 +1,5 @@
 'use strict';
 
-var KEY_CODE_ENTER = 13;
 var KEY_CODE_ESCAPE = 27;
 
 var openSetup = document.querySelector('.setup-open');
